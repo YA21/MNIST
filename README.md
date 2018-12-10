@@ -1,3 +1,3 @@
 # MNIST
 
-this repository is for mnist tutorial.
+repository for mnist tutorial
