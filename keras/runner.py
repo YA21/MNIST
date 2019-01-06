@@ -1,14 +1,18 @@
 import numpy as np
+import json
 from keras.datasets import mnist
 
 from utils.preprocess import preprocess
 from models.fully_connected_nn import build_model
 
 if __name__ == '__main__':
-    # setting parameters
-    batch_size = 128
-    num_classes = 10
-    epochs = 1
+    # loading parameters
+    with open("configs/default.json", mode="r") as f:
+        params = json.load(f)
+
+    num_classes = params["num_classes"]
+    epochs = params["epochs"]
+    batch_size = params["batch_size"]
 
     # loading datasets
     (X_train, y_train),(X_test, y_test) = mnist.load_data()
