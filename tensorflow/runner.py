@@ -1,10 +1,11 @@
 from tensorflow.examples.tutorials.mnist import input_data
 import tensorflow as tf
+import os
 
 # load mnist data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
-num_iteration = 10000
+num_iteration = 2000
 
 # set placeholder
 x = tf.placeholder(tf.float32, [None, 784])
@@ -43,3 +44,8 @@ with tf.Session() as sess:
 
     test_accuracy = sess.run(accuracy, feed_dict={x:mnist.test.images, y:mnist.test.labels})
     print("accuracy for test data: ", test_accuracy)
+
+    # save model
+    saver = tf.train.Saver()
+    os.makedirs("model", exist_ok=True)
+    saver.save(sess, "./model/mnist_{}.ckpt".format(num_iteration))
